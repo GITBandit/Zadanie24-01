@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Wspólnoty mieszkaniowe</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"/>
+
+</head>
+<body>
+<div style="margin-left: 2%; margin-top: 2%">
+
+    <h1>Wspólnoty mieszkaniowe</h1>
+
+    <br/>
+
+    <ul th:each="housingAssociation: ${housingAssociationList}">
+        <a th:href="@{'/association/' + ${housingAssociation.getId()}}">
+            <li th:text="${housingAssociation.getName()}">Wspólnota 1</li>
+
+        </a>
+
+    </ul>
+
+</div>
+
+</body>
+</html>

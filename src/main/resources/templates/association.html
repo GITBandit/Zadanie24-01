@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title th:text="'Wspólnota mieszkaniowa ' + ${association.getName()}">Wspólnota mieszkaniowa</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"/>
+
+</head>
+<body>
+<div style="margin-left: 2%; margin-top: 2%">
+
+    <h1 th:text="'Wspólnota mieszkaniowa ' + ${association.getName()}">Wspólnota mieszkaniowa</h1>
+
+    <br/>
+
+    <p>
+        <span style="font-weight: bold">Adres wspólnoty:  </span>
+        <span th:text="${association.getStreetName()} + ' ' +  ${association.getHouseNumber()}"></span>
+    </p>
+    <p>
+        <span style="font-weight: bold">Liczba mieszkań we wspólnocie:  </span>
+        <span th:text="${association.getFlatList().size()}"></span>
+    </p>
+
+    <p>
+        <span style="font-weight: bold">Powierzchnia mieszkań we wspólnocie:  </span>
+        <span th:text="${flatAreas} + 'm'"></span>
+    </p>
+
+    <p>
+        <span style="font-weight: bold">Mieszkania wspólnoty:  </span>
+    </p>
+
+    <ul th:each="flat: ${flatList}">
+        <li th:text="'Mieszkanie nr ' + ${flat.getFlatNumber()} + ', o powierzchni ' + ${flat.getFlatArea()}"></li>
+    </ul>
+
+    <p>
+        <span style="font-weight: bold">Mieszkańcy wspólnoty:  </span>
+    </p>
+    <ul th:each="occupant: ${occupantsList}">
+        <li th:text="${occupant.getFirstName()} + ' ' + ${occupant.getLastName()}"></li>
+    </ul>
+
+
+</div>
+
+</body>
+</html>
