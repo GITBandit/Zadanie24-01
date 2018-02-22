@@ -11,6 +11,11 @@
 
     <h1 th:text="'Wspólnota mieszkaniowa ' + ${association.getName()}">Wspólnota mieszkaniowa</h1>
 
+    <div>
+        <button  type="button" action="#">Edytuj wspólnotę</button>
+        <button  type="button" action="#">Usuń wspólnotę</button>
+    </div>
+
     <br/>
 
     <p>
@@ -32,14 +37,18 @@
     </p>
 
     <ul th:each="flat: ${flatList}">
+        <a th:href="@{'/flat/' + ${flat.getId()}}">
         <li th:text="'Mieszkanie nr ' + ${flat.getFlatNumber()} + ', o powierzchni ' + ${flat.getFlatArea()}"></li>
+        </a>
     </ul>
 
     <p>
         <span style="font-weight: bold">Mieszkańcy wspólnoty:  </span>
     </p>
     <ul th:each="occupant: ${occupantsList}">
+        <a th:href="@{'/occupant/' + ${occupant.getId()}}">
         <li th:text="${occupant.getFirstName()} + ' ' + ${occupant.getLastName()}"></li>
+        </a>
     </ul>
 
 
