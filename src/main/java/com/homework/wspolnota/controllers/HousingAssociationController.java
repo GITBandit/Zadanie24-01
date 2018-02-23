@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.ArrayList;
@@ -52,6 +53,26 @@ public class HousingAssociationController {
 
         return "association";
     }
+
+    @GetMapping("/association/edit/{id}")
+    private String editAssociation(@PathVariable("id") Long id, Model model){
+
+        HousingAssociation association = housingAssociationRepository.getOne(id);
+
+        model.addAttribute("association", association);
+
+        return "association_form";
+    }
+
+    @PostMapping("/association/edit/{id}")
+    @ResponseBody
+    private String updateAssociation(@PathVariable("id") Long id, HousingAssociation housingAssociation){
+
+        housingAssociationRepository.save(housingAssociation);
+
+        return "updated";
+    }
+
 
     @GetMapping("/association/delete/{id}")
     @ResponseBody
