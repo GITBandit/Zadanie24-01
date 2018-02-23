@@ -17,9 +17,11 @@
 
     <div>
         <a th:href="@{'/occupant/edit/'+ ${occupant.getId()}}">
-        <button type="button">Edytuj mieszkańca</button>
+            <button type="button">Edytuj mieszkańca</button>
         </a>
-        <button  type="button" action="#">Usuń mieszkańca</button>
+        <a th:href="@{'/occupant/delete/'+ ${occupant.getId()}}">
+            <button  type="button">Usuń mieszkańca</button>
+        </a>
     </div>
 
     <br/>

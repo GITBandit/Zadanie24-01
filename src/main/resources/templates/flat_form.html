@@ -1,10 +1,55 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <meta charset="UTF-8"/>
+    <title th:text="'Edytujesz mieszkanie nr' + ${flat.getFlatNumber()}">Mieszkanie</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"/>
+    <script>
+        function goBack() {
+            window.history.back();
+        }
+    </script>
 </head>
 <body>
+<div style="margin-left: 2%; margin-top: 2%">
 
+    <h1 th:text="'Edycja mieszkania nr ' +${flat.getFlatNumber()}">Mieszkanie</h1>
+
+    <br/><br/>
+
+    <div>
+        <a href="#" onclick="goBack()">Wróć</a>
+    </div>
+
+    <br/>
+
+    <form th:method="post" th:object="${flat}">
+        <p style="font-weight: bold">Numer mieszkania:</p>
+        <input type="text" th:field="*{flatNumber}"/><br/><br/>
+        <p style="font-weight: bold">Powierzchnia mieszkania:</p>
+        <input type="text" th:field="*{flatArea}"/><br/><br/>
+        <p style="font-weight: bold">Wspólnota mieszkaniowa:</p>
+        <select th:field="*{housingAssociation}">
+            <option th:each="association : ${associations}" th:text="${association.getName()}" th:value="${association.id}"></option>
+        </select>
+
+        <br/><br/>
+
+        <p style="font-weight: bold">Mieszkańcy:</p>
+        <ul>
+            <li th:each="occupant : ${occupants}">
+                <input th:type="checkbox" th:field="*{occupantList}" th:value="${occupant.id}" th:text="' ' + ${occupant.firstName} + ' ' + ${occupant.lastName}"/>
+
+            </li>
+        </ul>
+
+
+
+        <input type="submit" value="Zapisz"/>
+
+    </form>
+
+
+</div>
 </body>
 </html>

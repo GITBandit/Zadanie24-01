@@ -32,6 +32,8 @@
         <select th:field="*{sex}">
             <option th:each="sex : ${sexes}" th:text="${sex.getSexTranslation()}" th:value="${sex}"></option>
         </select>
+        <br/>
+        <br/>
         <p style="font-weight: bold">Mieszkanie:</p>
         <select th:field="*{flat}">
             <option th:each="flat : ${flats}" th:text="${flat.getFlatNumber()}" th:value="${flat.id}"></option>

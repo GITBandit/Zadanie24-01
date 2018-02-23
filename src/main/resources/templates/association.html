@@ -4,7 +4,11 @@
     <meta charset="UTF-8"/>
     <title th:text="'Wspólnota mieszkaniowa ' + ${association.getName()}">Wspólnota mieszkaniowa</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"/>
-
+    <script>
+        function goBack() {
+            window.history.back();
+        }
+    </script>
 </head>
 <body>
 <div style="margin-left: 2%; margin-top: 2%">
@@ -12,8 +16,21 @@
     <h1 th:text="'Wspólnota mieszkaniowa ' + ${association.getName()}">Wspólnota mieszkaniowa</h1>
 
     <div>
-        <button  type="button" action="#">Edytuj wspólnotę</button>
-        <button  type="button" action="#">Usuń wspólnotę</button>
+        <a th:href="@{'/association/edit/'+ ${association.getId()}}">
+            <button  type="button" action="#">Edytuj wspólnotę</button>
+        </a>
+        <a th:href="@{'/association/delete/'+ ${association.getId()}}">
+            <button  type="button" action="#">Usuń wspólnotę</button>
+        </a>
+        <a href="#">
+            <button  type="button" action="#">Dodaj mieszkanie</button>
+        </a>
+    </div>
+
+    <br/>
+
+    <div>
+        <a href="#" onclick="goBack()">Wróć</a>
     </div>
 
     <br/>

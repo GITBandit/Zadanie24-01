@@ -11,7 +11,7 @@ public class Flat {
     private long id;
     private int flatNumber;
     private double flatArea;
-    @OneToMany(mappedBy = "flat")
+    @OneToMany(mappedBy = "flat", cascade = {CascadeType.ALL})
     private List<Occupant> occupantList;
     @ManyToOne
     private HousingAssociation housingAssociation;

@@ -4,7 +4,11 @@
     <meta charset="UTF-8"/>
     <title th:text="'Mieszkanie nr ' + ${flat.getFlatNumber()}">Mieszkanie</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"/>
-
+    <script>
+        function goBack() {
+            window.history.back();
+        }
+    </script>
 </head>
 <body>
 <div style="margin-left: 2%; margin-top: 2%">
@@ -12,8 +16,19 @@
     <h1 th:text="'Mieszkanie nr ' + ${flat.getFlatNumber()}">Mieszkanie</h1>
 
     <div>
-        <button  type="button" action="#">Edytuj mieszkanie</button>
-        <button  type="button" action="#">Usuń mieszkanie</button>
+        <a th:href="@{'/flat/edit/'+ ${flat.getId()}}">
+            <button  type="button" action="#">Edytuj mieszkanie</button>
+        </a>
+        <a th:href="@{'/flat/delete/'+ ${flat.getId()}}">
+            <button  type="button" action="#">Usuń mieszkanie</button>
+        </a>
+        <button  type="button" action="#">Dodaj mieszkańca</button>
+    </div>
+
+    <br/>
+
+    <div>
+        <a href="#" onclick="goBack()">Wróć</a>
     </div>
 
     <br/>

@@ -64,4 +64,13 @@ public class OccupantController {
         return "updated 2";
     }
 
+    @GetMapping("/occupant/delete/{id}")
+    @ResponseBody
+    private String deleteOccupant(@PathVariable("id")Long id){
+
+        occupantRepository.delete(id);
+
+        return "deleted";
+    }
+
 }
