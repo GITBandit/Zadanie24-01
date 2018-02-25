@@ -51,7 +51,7 @@ public class OccupantController {
         model.addAttribute("flats", flatList);
 
 
-        return "occupant_form";
+        return "occupant_edit_form";
     }
 
     @PostMapping("/occupant/edit/{id}")
@@ -71,6 +71,33 @@ public class OccupantController {
         occupantRepository.delete(id);
 
         return "deleted";
+    }
+
+    @GetMapping("/occupant/add")
+    private String editOccupant(Model model){
+
+        Occupant occupant = new Occupant();
+
+        model.addAttribute("occupant",occupant);
+
+        model.addAttribute("sexes", Sex.values());
+
+        List<Flat> flatList = flatRepository.findAll();
+
+        model.addAttribute("flats", flatList);
+
+
+        return "occupant_add_form";
+    }
+
+    @PostMapping("/occupant/add")
+    @ResponseBody
+    private String updateOccupant(Occupant occupant){
+
+        occupantRepository.save(occupant);
+
+
+        return "saved";
     }
 
 }

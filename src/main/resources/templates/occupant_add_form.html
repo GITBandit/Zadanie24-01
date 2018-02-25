@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Nowy mieszkaniec</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"/>
+    <script>
+        function goBack() {
+            window.history.back();
+        }
+    </script>
+</head>
+<body>
+<div style="margin-left: 2%; margin-top: 2%">
+
+    <h1>Nowy mieszkaniec</h1>
+
+    <br/><br/>
+
+    <div>
+        <a href="#" onclick="goBack()">Wróć</a>
+    </div>
+
+    <br/>
+
+    <form th:method="post" th:object="${occupant}">
+        <p style="font-weight: bold">Imię:</p>
+        <input type="text" th:field="*{firstName}"/><br/><br/>
+        <p style="font-weight: bold">Nazwisko:</p>
+        <input type="text" th:field="*{lastName}"/><br/><br/>
+        <p style="font-weight: bold">Płeć:</p>
+        <select th:field="*{sex}">
+            <option th:each="sex : ${sexes}" th:text="${sex.getSexTranslation()}" th:value="${sex}"></option>
+        </select>
+        <br/>
+        <br/>
+        <p style="font-weight: bold">Mieszkanie:</p>
+        <select th:field="*{flat}">
+            <option th:each="flat : ${flats}" th:text="${flat.getFlatNumber()}" th:value="${flat.id}"></option>
+        </select>
+        <br/><br/>
+        <input type="submit" value="Zapisz"/>
+
+    </form>
+
+
+</div>
+</body>
+</html>

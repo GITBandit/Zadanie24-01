@@ -49,6 +49,9 @@ public class HousingAssociation {
 
     public String getName() {
         if(name == null){
+            if(streetName == null){
+                return "";
+            }
             return streetName + " " + houseNumber;
         }
         return name;

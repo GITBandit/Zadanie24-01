@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Nowe mieszkanie</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"/>
+    <script>
+        function goBack() {
+            window.history.back();
+        }
+    </script>
+</head>
+<body>
+<div style="margin-left: 2%; margin-top: 2%">
+
+    <h1>Nowe mieszkanie</h1>
+
+    <br/><br/>
+
+    <div>
+        <a href="#" onclick="goBack()">Wróć</a>
+    </div>
+
+    <br/>
+
+    <form th:method="post" th:object="${flat}">
+        <p style="font-weight: bold">Numer mieszkania:</p>
+        <input type="text" th:field="*{flatNumber}"/><br/><br/>
+        <p style="font-weight: bold">Powierzchnia mieszkania:</p>
+        <input type="text" th:field="*{flatArea}"/><br/><br/>
+        <p style="font-weight: bold">Wspólnota mieszkaniowa:</p>
+        <select th:field="*{housingAssociation}">
+            <option th:each="association : ${associations}" th:text="${association.getName()}" th:value="${association.id}"></option>
+        </select>
+
+        <br/><br/>
+
+        <input type="submit" value="Zapisz"/>
+
+    </form>
+
+
+</div>
+</body>
+</html>

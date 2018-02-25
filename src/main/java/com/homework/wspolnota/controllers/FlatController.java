@@ -58,7 +58,7 @@ public class FlatController {
 
         model.addAttribute("associations", housingAssociationList);
 
-        return "flat_form";
+        return "flat_edit_form";
     }
 
     @PostMapping("/flat/edit/{id}")
@@ -78,4 +78,30 @@ public class FlatController {
 
         return "deleted";
     }
+
+    @GetMapping("/flat/add")
+    private String addFlat(Model model){
+
+        Flat flat = new Flat();
+
+        model.addAttribute("flat", flat);
+
+        List<Occupant> occupantList = occupantRepository.findAll();
+
+        List<HousingAssociation> associations = housingAssociationRepository.findAll();
+
+        model.addAttribute("associations", associations);
+
+        return "flat_add_form";
+    }
+
+    @PostMapping("/flat/add")
+    @ResponseBody
+    private String updateFlat(Flat flat){
+
+        flatRepository.save(flat);
+
+        return "added";
+    }
+
 }

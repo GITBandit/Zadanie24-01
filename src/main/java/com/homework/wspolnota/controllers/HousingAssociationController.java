@@ -61,7 +61,7 @@ public class HousingAssociationController {
 
         model.addAttribute("association", association);
 
-        return "association_form";
+        return "association_edit_form";
     }
 
     @PostMapping("/association/edit/{id}")
@@ -81,5 +81,36 @@ public class HousingAssociationController {
         housingAssociationRepository.delete(id);
 
         return "deleted";
+    }
+
+    @GetMapping("/association/add")
+    private String addAssociation(Model model){
+
+        HousingAssociation association = new HousingAssociation();
+
+        model.addAttribute("association", association);
+
+        return "association_add_form";
+    }
+
+    @PostMapping("/association/add")
+    @ResponseBody
+    private String updateAssociation(HousingAssociation housingAssociation){
+
+        HousingAssociation newAssociation = new HousingAssociation();
+
+        newAssociation.setHouseNumber(housingAssociation.getHouseNumber());
+
+        newAssociation.setStreetName(housingAssociation.getStreetName());
+
+        if (!housingAssociation.equals("")){
+            newAssociation.setName(null);
+        } else {
+            newAssociation.setName(housingAssociation.getName());
+        }
+
+        housingAssociationRepository.save(newAssociation);
+
+        return "updated";
     }
 }
