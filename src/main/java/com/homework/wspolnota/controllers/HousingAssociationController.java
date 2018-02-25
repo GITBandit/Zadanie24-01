@@ -51,7 +51,7 @@ public class HousingAssociationController {
 
         model.addAttribute("occupantsList", occupantsInAssociation);
 
-        return "association";
+        return "association/association";
     }
 
     @GetMapping("/association/edit/{id}")
@@ -61,7 +61,7 @@ public class HousingAssociationController {
 
         model.addAttribute("association", association);
 
-        return "association_edit_form";
+        return "association/association_edit_form";
     }
 
     @PostMapping("/association/edit/{id}")
@@ -75,12 +75,11 @@ public class HousingAssociationController {
 
 
     @GetMapping("/association/delete/{id}")
-    @ResponseBody
     private String deleteAssociation(@PathVariable("id")Long id){
 
         housingAssociationRepository.delete(id);
 
-        return "deleted";
+        return "output?entity=association&operation=delete";
     }
 
     @GetMapping("/association/add")
@@ -90,7 +89,7 @@ public class HousingAssociationController {
 
         model.addAttribute("association", association);
 
-        return "association_add_form";
+        return "association/association_add_form";
     }
 
     @PostMapping("/association/add")

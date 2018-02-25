@@ -34,7 +34,7 @@ public class OccupantController {
 
         model.addAttribute("flat", flat);
 
-        return "occupant";
+        return "occupant/occupant";
     }
 
     @GetMapping("/occupant/edit/{id}")
@@ -51,7 +51,7 @@ public class OccupantController {
         model.addAttribute("flats", flatList);
 
 
-        return "occupant_edit_form";
+        return "occupant/occupant_edit_form";
     }
 
     @PostMapping("/occupant/edit/{id}")
@@ -87,7 +87,7 @@ public class OccupantController {
         model.addAttribute("flats", flatList);
 
 
-        return "occupant_add_form";
+        return "occupant/occupant_add_form";
     }
 
     @PostMapping("/occupant/add")

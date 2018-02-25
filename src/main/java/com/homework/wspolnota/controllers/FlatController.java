@@ -40,7 +40,7 @@ public class FlatController {
 
         model.addAttribute("occupantList", occupantList);
 
-        return "flat";
+        return "flat/flat";
     }
 
     @GetMapping("/flat/edit/{id}")
@@ -58,7 +58,7 @@ public class FlatController {
 
         model.addAttribute("associations", housingAssociationList);
 
-        return "flat_edit_form";
+        return "flat/flat_edit_form";
     }
 
     @PostMapping("/flat/edit/{id}")
@@ -92,7 +92,7 @@ public class FlatController {
 
         model.addAttribute("associations", associations);
 
-        return "flat_add_form";
+        return "flat/flat_add_form";
     }
 
     @PostMapping("/flat/add")
