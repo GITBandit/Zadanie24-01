@@ -62,21 +62,36 @@ public class FlatController {
     }
 
     @PostMapping("/flat/edit/{id}")
-    @ResponseBody
     private String updateFlat(@PathVariable("id")Long id, Flat flat){
 
         flatRepository.save(flat);
 
-        return "edited";
+        Long associationID;
+
+        if(flat.getHousingAssociation() != null){
+            associationID = flat.getHousingAssociation().getId();
+            return "redirect:/output?entity=flat&operation=update&id=" + associationID;
+        }
+
+        return "redirect:/output?entity=association&operation=update";
     }
 
     @GetMapping("/flat/delete/{id}")
-    @ResponseBody
     private String deleteFlat(@PathVariable("id")Long id){
 
-        flatRepository.delete(id);
+        Long associationID = flatRepository.getOne(id).getHousingAssociation().getId();
 
-        return "deleted";
+        String url;
+
+        if(associationID != 0){
+            url = "redirect:/output?entity=flat&operation=delete&id=" + associationID;
+        } else {
+            url = "redirect:/output?entity=flat&operation=delete";
+        }
+
+            flatRepository.delete(id);
+
+        return url;
     }
 
     @GetMapping("/flat/add")
@@ -96,12 +111,18 @@ public class FlatController {
     }
 
     @PostMapping("/flat/add")
-    @ResponseBody
-    private String updateFlat(Flat flat){
+    private String addFlat(Flat flat){
 
         flatRepository.save(flat);
 
-        return "added";
+        Long associationID;
+
+        if(flat.getHousingAssociation() != null){
+            associationID = flat.getHousingAssociation().getId();
+            return "redirect:/output?entity=flat&operation=add&id=" + associationID;
+        }
+
+        return "redirect:/output?entity=flat&operation=add";
     }
 
 }

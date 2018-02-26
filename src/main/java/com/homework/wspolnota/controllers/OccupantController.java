@@ -4,6 +4,7 @@ import com.homework.wspolnota.model.Flat;
 import com.homework.wspolnota.model.Occupant;
 import com.homework.wspolnota.model.Sex;
 import com.homework.wspolnota.model.repositories.FlatRepository;
+import com.homework.wspolnota.model.repositories.HousingAssociationRepository;
 import com.homework.wspolnota.model.repositories.OccupantRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,6 +23,8 @@ public class OccupantController {
     OccupantRepository occupantRepository;
     @Autowired
     FlatRepository flatRepository;
+    @Autowired
+    HousingAssociationRepository housingAssociationRepository;
 
     @GetMapping("/occupant/{id}")
     private String occupantInfo(@PathVariable("id") Long id, Model model){
@@ -55,22 +58,37 @@ public class OccupantController {
     }
 
     @PostMapping("/occupant/edit/{id}")
-    @ResponseBody
     private String updateOccupant(@PathVariable("id") Long id, Occupant occupant){
 
         occupantRepository.save(occupant);
 
+        if (occupant.getFlat().getHousingAssociation() != null) {
 
-        return "updated 2";
+            Long associationID = occupant.getFlat().getHousingAssociation().getId();
+
+            return "redirect:/output?entity=occupant&operation=update&id=" + associationID;
+
+        }
+
+        return "redirect:/output?entity=occupant&operation=update";
     }
 
     @GetMapping("/occupant/delete/{id}")
-    @ResponseBody
     private String deleteOccupant(@PathVariable("id")Long id){
+
+        String url;
+
+        Long associationID = housingAssociationRepository.findOne(occupantRepository.getOne(id).getFlat().getHousingAssociation().getId()).getId();
+
+        if (associationID != 0){
+            url = "redirect:/output?entity=occupant&operation=delete&id=" + associationID;
+        } else {
+            url = "redirect:/output?entity=occupant&operation=delete";
+        }
 
         occupantRepository.delete(id);
 
-        return "deleted";
+        return url;
     }
 
     @GetMapping("/occupant/add")
@@ -91,13 +109,19 @@ public class OccupantController {
     }
 
     @PostMapping("/occupant/add")
-    @ResponseBody
-    private String updateOccupant(Occupant occupant){
+    private String addOccupant(Occupant occupant){
 
         occupantRepository.save(occupant);
 
+        if (occupant.getFlat().getHousingAssociation() != null) {
 
-        return "saved";
+            Long associationID = occupant.getFlat().getHousingAssociation().getId();
+
+            return "redirect:/output?entity=occupant&operation=add&id=" + associationID;
+
+        }
+
+        return "redirect:/output?entity=occupant&operation=add";
     }
 
 }

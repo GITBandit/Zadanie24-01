@@ -11,7 +11,7 @@
 
     <h1 th:text="${entity} + ' ' + ${operation}">Wynik</h1>
 
-    <a href="/">
+    <a href="/" th:href="${id != null} ? ${urlEntity + '/'} + ${id} : ${'/'} ">
         <p>Wróć</p>
     </a>
 </div>

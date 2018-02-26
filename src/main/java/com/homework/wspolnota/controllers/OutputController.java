@@ -15,16 +15,20 @@ public class OutputController {
                         @RequestParam (value = "operation") String operation,
                         @RequestParam (value = "id", required = false) Long id){
 
-        String outputEntity = "";
-        String outputOperation = "";
+        String outputEntity;
+        String outputOperation;
+        String urlEntity;
         int outputID;
 
         if(entity.equals("association")){
             outputEntity = "Wspólnota mieszkaniowa";
+            urlEntity = "association";
         } else if (entity.equals("flat")){
             outputEntity = "Mieszkanie";
+            urlEntity = "association";
         } else {
-            operation = "Mieszkaniec";
+            outputEntity = "Mieszkaniec";
+            urlEntity = "association";
         }
 
         if(operation.equals("delete")){
@@ -32,7 +36,7 @@ public class OutputController {
         } else if (operation.equals("update")){
             outputOperation = " - zaktualizowano";
         } else {
-            outputEntity = " - dodano";
+            outputOperation = " - dodano";
         }
 
 
@@ -40,6 +44,7 @@ public class OutputController {
         model.addAttribute("entity", outputEntity);
         model.addAttribute("operation", outputOperation);
         model.addAttribute("id", id);
+        model.addAttribute("urlEntity", urlEntity);
 
 
         return "output/change_confirmation";

@@ -65,12 +65,11 @@ public class HousingAssociationController {
     }
 
     @PostMapping("/association/edit/{id}")
-    @ResponseBody
     private String updateAssociation(@PathVariable("id") Long id, HousingAssociation housingAssociation){
 
         housingAssociationRepository.save(housingAssociation);
 
-        return "updated";
+        return "redirect:/output?entity=association&operation=update";
     }
 
 
@@ -79,7 +78,7 @@ public class HousingAssociationController {
 
         housingAssociationRepository.delete(id);
 
-        return "output?entity=association&operation=delete";
+        return "redirect:/output?entity=association&operation=delete";
     }
 
     @GetMapping("/association/add")
@@ -93,7 +92,6 @@ public class HousingAssociationController {
     }
 
     @PostMapping("/association/add")
-    @ResponseBody
     private String updateAssociation(HousingAssociation housingAssociation){
 
         HousingAssociation newAssociation = new HousingAssociation();
@@ -102,7 +100,7 @@ public class HousingAssociationController {
 
         newAssociation.setStreetName(housingAssociation.getStreetName());
 
-        if (!housingAssociation.equals("")){
+        if (housingAssociation.getName().equals("")){
             newAssociation.setName(null);
         } else {
             newAssociation.setName(housingAssociation.getName());
@@ -110,6 +108,6 @@ public class HousingAssociationController {
 
         housingAssociationRepository.save(newAssociation);
 
-        return "updated";
+        return "redirect:/output?entity=association&operation=add";
     }
 }
